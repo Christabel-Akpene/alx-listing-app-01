@@ -10,6 +10,11 @@
   --color-secondary-green: #2cc39b;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
     display: none;

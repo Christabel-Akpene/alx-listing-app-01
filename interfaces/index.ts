@@ -15,6 +15,8 @@ export interface PropertyProps {
     },
     image: string,
     discount?: string,
+    description?: string,
+
 
 }
 
@@ -26,4 +28,13 @@ interface Button{
 interface Card{
     title: string;
     content: string;
+}
+
+export interface ReviewProps {
+  image: string;        
+  name: string;         
+  yearsOnALX: number;   
+  date: string;         
+  tripType: string;     
+  review: string;       
 }

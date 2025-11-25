@@ -51,7 +51,7 @@ const Card = ({
       <div className="flex justify-between items-center">
         <div className="border p-2 rounded-4xl">
           <p className="flex items-center justify-between gap-2">
-            <IoBed /> <span>{offers.bed}</span> <FaBath /> {offers.shower}{" "}
+            <IoBed /> <span>{offers.bed}</span> <FaBath /> {offers.shower}
             <IoPeople /> {offers.occupants}
           </p>
         </div>

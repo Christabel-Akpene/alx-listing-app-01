@@ -4,14 +4,52 @@ import Card from "@/components/common/Card";
 import HouseType from "@/components/common/HouseType";
 import { PROPERTYLISTINGSAMPLE } from "@/constants";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [visibleItems, setVisibleItems] = useState(8);
+  const [data, setData] = useState(PROPERTYLISTINGSAMPLE);
+  const [filteredData, setFilteredData] = useState(PROPERTYLISTINGSAMPLE);
+  const [filter, setFilter] = useState("all");
+
+
+  const handleFilter = (filter:string) => {
+    setFilter(filter)
+    if (filter === "all"){
+      setFilteredData(data);
+    }
+
+    else if (filter === "checkin"){
+      const filtered = data.filter((item) => {
+        return (item.category.includes("Self Checkin"))
+      })
+      setFilteredData(filtered)
+    }
+    else if (filter === "beach"){
+      const filtered = data.filter((item) => {
+        return (item.category.includes("Beachfront"))
+      })
+      setFilteredData(filtered)
+    }
+    else if (filter === "mountain"){
+      const filtered = data.filter((item) => {
+        return (item.category.includes("Mountain View"))
+      })
+      setFilteredData(filtered)
+    }
+    else if (filter === "wifi"){
+      const filtered = data.filter((item) => {
+        return (item.category.includes("Free WiFi"))
+      })
+      setFilteredData(filtered)
+    }
+  }
+
 
   const handleShowMore = () => {
     setVisibleItems((prev) => prev + 4);
   };
+
 
   return (
     <>
@@ -30,8 +68,18 @@ export default function Home() {
         </div>
       </div>
 
+            {/* //Filter Buttons */}
+
+      <div className="flex space-x-4 mt-8 overflow-auto no-scrollbar">
+        <button onClick={()=>handleFilter("all")} className={`border px-3 py-1 hover:bg-green-100 transition-colors rounded-2xl cursor-pointe whitespace-nowrap ${filter === "all" ? "border-green-700 bg-green-100" : ""}`}>All</button>
+        <button onClick={()=>handleFilter("checkin")} className={`border px-3 py-1 hover:bg-green-100 transition-colors rounded-2xl cursor-pointe whitespace-nowrap ${filter === "checkin" ? "border-green-700 bg-green-100" : ""}`}>Self Checkin</button>
+        <button onClick={()=>handleFilter("beach")} className={`border px-3 py-1 hover:bg-green-100 transition-colors rounded-2xl cursor-pointe whitespace-nowrap ${filter === "beach" ? "border-green-700 bg-green-100" : ""}`}>Beach Front</button>
+        <button onClick={()=>handleFilter("wifi")} className={`border px-3 py-1 hover:bg-green-100 transition-colors rounded-2xl cursor-pointe whitespace-nowrap ${filter === "wifi" ? "border-green-700 bg-green-100" : ""}`}>Free WiFi</button>
+        <button onClick={()=>handleFilter("mountain")} className={`border px-3 py-1 hover:bg-green-100 transition-colors rounded-2xl cursor-pointe whitespace-nowrap ${filter === "mountain" ? "border-green-700 bg-green-100" : ""}`}>Mountain View</button>
+      </div>
+
       <div className="my-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {PROPERTYLISTINGSAMPLE.slice(0, visibleItems).map(
+        {filteredData.slice(0, visibleItems).map(
           (
             { name, address, rating, category, price, offers, image, discount },
             index
@@ -54,7 +102,9 @@ export default function Home() {
         )}
       </div>
 
-      {visibleItems < PROPERTYLISTINGSAMPLE.length && (
+
+
+      {visibleItems < filteredData.length && (
         <div className="flex flex-col items-center justify-center gap-4">
           <button
             onClick={handleShowMore}

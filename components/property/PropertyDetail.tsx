@@ -10,10 +10,8 @@ import BookingSection from "./BookingSection";
 import { Separator } from "../ui/separator";
 import { REVIEWS } from "@/constants";
 import ReviewCard from "./ReviewSection";
-import { useState } from "react";
 
 const PropertyDetail: React.FC<{ property: PropertyProps }> = ({property}) => {
-    const [active, setActive] = useState("description");
 
   return (
     <div className=" mx-auto p-6 lg:px-12">

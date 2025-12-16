@@ -30,7 +30,7 @@
 
 ###  Clone the Repository
 ```bash
-git clone https://github.com/your-username/alx-listing-app.git
+git clone https://github.com/Christabel-Akpene/alx-listing-app-detail.git
 cd alx-listing-app
 ```
 
